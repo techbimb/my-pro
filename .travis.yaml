@@ -1,0 +1,18 @@
+language: minimal
+
+services:
+  - docker
+
+jobs:
+  include:
+    - stage: build and push docker image
+      script:
+        # Build the Docker image
+        - docker build -t bimbstech24/swiss-docker.
+
+        # Log in to Docker Hub
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
+        # Push the Docker image to Docker Hub
+        - docker push bimbstech24/swiss-docker
+
